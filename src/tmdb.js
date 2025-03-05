@@ -2,7 +2,7 @@ const axios = require('axios');
 
 async function getTmdbId(imdbId, options = {}) {
     const { proxyAgent } = options;
-    const apiKey = 'b9e715a786a5ea09e5998b8fabbb49c5';
+    const apiKey = process.env.TMDB_API_KEY;
     const url = `https://api.themoviedb.org/3/find/${imdbId}?api_key=${apiKey}&external_source=imdb_id`;
     
     try {
