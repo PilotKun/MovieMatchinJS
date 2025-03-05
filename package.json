@@ -1,0 +1,22 @@
+{
+  "name": "moviematchinjs",
+  "version": "1.0.0",
+  "description": "A project to fetch TMDb IDs, scrape Letterboxd ratings, and save results to an Excel file.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.3",
+    "csv-parser": "^3.2.0",
+    "csv-stringify": "^6.5.2",
+    "fs": "^0.0.1-security",
+    "https-proxy-agent": "^7.0.6",
+    "p-limit": "^6.2.0",
+    "xlsx": "^0.17.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
