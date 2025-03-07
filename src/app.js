@@ -11,9 +11,9 @@ const pLimit = require('p-limit').default;
 // const proxyUrl = 'http://222.252.194.204:8080';
 // const proxyAgent = new HttpsProxyAgent(proxyUrl, { rejectUnauthorized: false });
 
-const FILTERED_MOVIES_FILE = "C:\\Users\\DELL\\Coding\\MovieMatchinJS\\filtered_movies.tsv";
+const FILTERED_MOVIES_FILE = "C:\\Users\\DELL\\Coding\\MovieMatchinJS\\src\\databaseResults\\filtered_movies.tsv";
 // We'll write incremental results to a CSV file
-const OUTPUT_CSV = path.join(__dirname, 'incremental_results.csv');
+const OUTPUT_CSV = path.join(__dirname, 'databaseResults', 'incremental_results.csv');
 
 const MAX_CONCURRENT = 10;
 const limit = pLimit(MAX_CONCURRENT);
