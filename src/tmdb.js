@@ -1,24 +1,24 @@
 const axios = require('axios');
 
-async function getTmdbId(imdbId, options = {}) {
-    const { proxyAgent } = options;
-    const apiKey = process.env.TMDB_API_KEY;
-    const url = `https://api.themoviedb.org/3/find/${imdbId}?api_key=${apiKey}&external_source=imdb_id`;
-    
+const TMDB_API_KEY = process.env.TMDB_API_KEY || 'ENTER_YOR_OWN_VALID_API_KEY_HERE';
+
+async function getTmdbId(imdbId) {
     try {
-        const response = await axios.get(url, {
-            httpAgent: proxyAgent,
-            httpsAgent: proxyAgent
-        });
-        const data = response.data;
-        // Assumes TMDB id is in the 'movie_results' array
-        if (data && data.movie_results && data.movie_results.length > 0) {
-            return data.movie_results[0].id;
+        const url = `https://api.themoviedb.org/3/find/${imdbId}`;
+        const params = {
+            api_key: TMDB_API_KEY,
+            external_source: 'imdb_id'
+        };
+        const response = await axios.get(url, { params });
+        const { movie_results } = response.data;
+        if (movie_results && movie_results.length > 0) {
+            return movie_results[0].id;
         }
-    } catch (error) {
-        console.error(`Error fetching TMDB ID for IMDb ID ${imdbId}:`, error.message);
+        return null;
+    } catch (err) {
+        console.error(`Error fetching TMDB ID for IMDb ID ${imdbId}:`, err.response.status);
+        return null;
     }
-    return null;
 }
 
 module.exports = { getTmdbId };

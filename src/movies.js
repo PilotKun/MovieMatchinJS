@@ -1,28 +1,23 @@
 const fs = require('fs');
-const path = require('path');
+const { parse } = require('csv-parse/sync');
 
-// A simple TSV parser to read the movies file.
-async function readMovies(filePath) {
-    return new Promise((resolve, reject) => {
-        fs.readFile(path.resolve(filePath), 'utf8', (err, data) => {
-            if (err) {
-                return reject(err);
-            }
-            const lines = data.split('\n').filter(line => line.trim() !== '');
-            // Assume first line is a header
-            const header = lines.shift().split('\t');
-            // Map each line to an object using header columns
-            const movies = lines.map(line => {
-                const values = line.split('\t');
-                const obj = {};
-                header.forEach((col, idx) => {
-                    obj[col] = values[idx];
-                });
-                return obj;
-            });
-            resolve(movies);
-        });
+function readMovies(filePath) {
+    // Read the entire file
+    const content = fs.readFileSync(filePath, 'utf8');
+    // Remove any comment lines (lines starting with "//") and empty lines
+    const filteredLines = content
+        .split('\n')
+        .filter(line => !line.trim().startsWith('//') && line.trim() !== '')
+        .join('\n');
+
+    // Parse the CSV with header
+    const records = parse(filteredLines, {
+        columns: true,
+        skip_empty_lines: true,
+        trim: true,
     });
+
+    return records;
 }
 
 module.exports = { readMovies };
