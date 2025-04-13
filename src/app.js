@@ -5,8 +5,8 @@ const { getTmdbId } = require('./tmdb');                   // Module to fetch TM
 const { getLetterboxdRatings } = require('./letterboxd');   // Module to scrape Letterboxd movie details
 const pLimit = require('p-limit').default;
 
-const INPUT_CSV = path.join(__dirname, 'imdb3172.csv');
-const OUTPUT_CSV = path.join(__dirname, 'movie_details.csv');
+const INPUT_CSV = path.join(__dirname, 'mainstream movies 9-4-25.csv');
+const OUTPUT_CSV = path.join(__dirname, 'fresh_data-9-4-25PT2.csv');
 const MAX_CONCURRENT = 10;
 const limit = pLimit(MAX_CONCURRENT);
 
@@ -41,6 +41,7 @@ async function processMovie(movie, index, total) {
             "Primary Title": movie.primaryTitle || '',
             "Original Title": movie.originalTitle || '',
             "Year": movie.startYear || '',
+            "RunTimeMinutes": movie.runtimeMinutes || '',
             "IMDb Rating": movie.averageRating || '',
             "IMDb Votes": movie.numVotes || '',
             "Letterboxd Avg Rating": ratingValue,
