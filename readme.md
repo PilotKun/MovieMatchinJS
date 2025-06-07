@@ -1,6 +1,6 @@
 # MovieMatchinJS
 
-MovieMatchinJS is a Node.js project that fetches TMDb IDs, scrapes Letterboxd ratings, and processes movie data by updating CSV files and generating Excel outputs.
+MovieMatchinJS is a Node.js project that fetches TMDb IDs, scrapes Letterboxd ratings, and processes movie data by updating CSV files and generating Excel outputs. The Database is not available here I am making a new site where the results will be listed. 
 
 ## Features
 
